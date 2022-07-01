@@ -1,0 +1,65 @@
+<script>
+    class Node {
+            element;
+            next = null;
+            constructor(element) {
+                this.element = element;
+            }
+        }
+
+        class LinkedList {
+            size = 0;
+            head = null;
+
+            size() {
+                return this.size();
+            }
+
+            head() {
+                return this.head;
+            }
+
+            add(element) {
+
+                if (this.head === null) {
+                    this.head = element;
+                    this.size++;
+                } else {
+                    let currentElement = this.head;
+                    for (let i = 0; i < this.size; i++) {
+
+                        if (currentElement.next === null) {
+                            currentElement.next = element;
+                            this.size++;
+                            break;
+                        } else {
+                            currentElement = currentElement.next;
+                        }
+                    }
+                }
+            }
+
+            showAll() {
+                let currentElement = this.head;
+
+                if (this.size === 0) console.log("List is empty");
+
+                for (let i = 0; i < this.size; i++) {
+                    console.log(currentElement);
+                    currentElement = currentElement.next;
+                }
+            }
+        }
+
+        // 
+        let linkedList = new LinkedList();
+
+        let node1 = new Node(1);
+        let node2 = new Node(2);
+        let node3 = new Node(3);
+
+        linkedList.add(node1);
+        linkedList.add(node3);
+
+        linkedList.showAll();
+</script>

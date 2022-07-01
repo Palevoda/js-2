@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+    <body>
+
+        <h1 id="id01">Old Heading</h1>
+        <h1 name="name01">Old Heading</h1>
+        <h1 class="class01">Old Heading</h1>
+        <button id="validateForm">Validate form</button>
+
+        <script>
+            const element = document.getElementById("id01");
+            element.innerHTML = "New Heading";
+            console.log(document.getElementsByTagName("h1"));
+            console.log(document.getElementsByName("name01"));
+            console.log(document.getElementsByClassName("name01"));
+
+            document.getElementById("id01").style.color = "blue";
+
+            document.getElementById("id01").onkeydown = console.log("Key pressed"); 
+        </script>
+
+
+    <!-- Forms -->
+
+        <script>
+            function validateForm() {
+                    let x = document.forms["myForm"]["fname"].value;
+                    if (x == "") {
+                        alert("Name must be filled out");
+                        return false;
+                    }
+                }
+        </script>
+
+        <form 
+            name="myForm" 
+            action="/action_page.php" 
+            onsubmit="return validateForm()" 
+            method="post"
+        >
+            Name: <input type="text" name="fname">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+
+
+</html>
