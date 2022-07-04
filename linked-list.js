@@ -47,27 +47,98 @@
                 }
             }
 
-            // addAt(position, element) {
+            addAt(position, element) {
 
-            //     if (position > this.size || position < 0) {
-            //         console.log("Index out of range");
-            //     } else if (position === 0) {
-            //         element = this.head;
-            //         this.head = element;
-            //     } else {
-            //         let currentElement = this.head;
-            //         for (let i = 0; i < this.size; i++) {
+                if (position > this.size || position < 0) {
+                    console.log("Index out of range");
+                } else if (position === 0) {
+                    element.next = this.head;
+                    this.head = element;
+                    this.size++;
+                } else {
+                    let previous = null;
+                    let currentElement = this.head;
+                    for (let i = 0; i <= this.size; i++) {
 
-            //             if (i === position) {
-            //                 currentElement.next = element;
-            //                 this.size++;
-            //                 break;
-            //             } else {
-            //                 currentElement = currentElement.next;
-            //             }
-            //         }
-            //     }
-            // }
+                        if (i === position) {
+                            previous.next = element;
+                            element.next = currentElement;
+                            this.size++;
+                            break;
+                        } else {
+                            previous = currentElement;
+                            currentElement = currentElement.next;
+                        }
+                    }
+                }
+            }
+
+            indexOf(element) {
+                    let previous = null;
+                    let currentElement = this.head;
+                    for (let i = 0; i <= this.size; i++) {
+                        if (element.element == currentElement.element) {                            
+                            return i;
+                        } else {
+                            previous = currentElement;
+                            currentElement = currentElement.next;
+                        }
+                    }
+            }
+
+            removeAt(position) {
+                if (position >= this.size || position < 0) {
+                    console.log("Index out of range");
+                } else if (position === 0) {
+                    this.head = this.head.next;
+                    this.size--;
+                } else {
+                    let previous = null;
+                    let currentElement = this.head;
+                    for (let i = 0; i <= this.size; i++) {
+
+                        if (i === position) {
+                            previous.next = currentElement.next;
+                            this.size--;
+                            break;
+                        } else {
+                            previous = currentElement;
+                            currentElement = currentElement.next;
+                        }
+                    }
+                }
+            }
+
+            remove() {
+                    let previous = null;
+                    let currentElement = this.head;
+                    for (let i = 0; i <= this.size; i++) {
+                        if (i === this.size) {
+                            previous.next = null;
+                            this.size--;
+                            break;
+                        } else {
+                            previous = currentElement;
+                            currentElement = currentElement.next;
+                        }
+                    }
+            }
+
+            elementAt(position) {
+                if (position > this.size || position < 0) {
+                    console.log("Index out of range");
+                } else {
+                    let previous = null;
+                    let currentElement = this.head;
+                    for (let i = 0; i <= this.size; i++) {
+                        if (i === position) {
+                            return currentElement;
+                        } 
+                        previous = currentElement;
+                        currentElement = currentElement.next;
+                    }
+                }
+            }
 
             showAll() {
                 let currentElement = this.head;
@@ -92,155 +163,17 @@
         linkedList.add(node3);
 
         linkedList.showAll();
-// linkedList.addAt(1, node2);
+        linkedList.addAt(2, node2);
 
-// linkedList.showAll();
+        console.log(linkedList.elementAt(1));
 
-
-
-// function Node(element) {  
-//     this.element = element;  
-//     this.next = null;
-// }
-
-// function LinkedList() {  
-    
-//     var length = 0;  
-//     var head = null; 
-
-//     this.size = function () {    
-//         return length;  
-//     }  
-    
-//     this.head = function () {    
-//         return head;  
-//     }  
-    
-//     this.add = function (element) {    
-        
-//         var node = new Node(element);    
-        
-//         if (head == null) 
-//         {      
-//             head = node;    
-//         } 
-//         else 
-//         {      
-//             var currentNode = head;
-
-//             while (currentNode.next) 
-//             {        
-//                 currentNode = currentNode.next;      
-//             }      
-            
-//                 currentNode.next = node;    
-//             }    
-//             length++;  
-//         }  
-
-//         this.remove = function (element) {   
-
-//             var currentNode = head;    
-
-//             var previousNode;    
-
-//             if (currentNode.element === element) 
-//             {      
-//                 head = currentNode.next;    
-//             } 
-//             else 
-//             {      
-//                 while (currentNode.element !== element) {        
-//                     previousNode = currentNode;        
-//                     currentNode = currentNode.next;      
-//                 }      
-//                 previousNode.next = currentNode.next;    
-//             }  
-//             length--;  
-//         }  
-
-//         this.isEmpty = function () {    
-//             return length === 0;  
-//         }  
-
-//         this.indexOf = function (element) {    
-//             var currentNode = head;    
-//             var index = -1;    
-//             while (currentNode) {      
-//                 index++;      
-//                 if (currentNode.element === element) {        
-//                     return index;      
-//                 }      
-//                 currentNode = currentNode.next;    
-//             }    
-//             return -1;  
-//         }  
-        
-//         this.elementAt = function (index) {    
-//             var currentNode = head;    
-//             var count = 0;    
-//             while (count < index) {      
-//                 count++;      
-//                 currentNode = currentNode.next;    
-//             }    
-//             return currentNode.element;  
-//         }  
-
-//         this.addAt = function (index, element) {    
-//             var node = new Node(element);    
-//             var currentNode = head;    
-//             var previousNode;    
-//             var currentIndex = 0;    
-//             if (index > length) {      
-//                 return false;    
-//             }    
-//             if (index === 0) {      
-//                 node.next = currentNode;      
-//                 head = node;    
-//             } else {      
-//                 while (currentIndex < index) {        
-//                     currentIndex++;        
-//                     previousNode = currentNode;        
-//                     currentNode = currentNode.next;      
-//                 }      
-//                 node.next = currentNode;      
-//                 previousNode.next = node;    
-//             }    
-//             length++;  
-//         }  
-
-//         this.removeAt = function (index) {    
-//             var currentNode = head;    
-//             var previousNode;    
-//             var currentIndex = 0;    
-//             if (index < 0 || index >= length) {      
-//                 return null;    
-//             }    
-//             if (index === 0) {      
-//                 head = currentIndex.next;    
-//             } else {      
-//                 while (currentIndex < index) {        
-//                     currentIndex++;        
-//                     previousNode = currentNode;        
-//                     currentNode = currentNode.next;      
-//                 }      
-//                 previousNode.next = currentNode.next;    
-//             }    
-//             length--;    
-//             return currentNode.element;  
-//         }
-
-//         this.showAll = function () {
-//             if (this.head !== null) {
-//                 let currentNode = head;
-
-//                 while(currentNode) {
-//                     console.log("Element: " + currentNode.element.element);
-//                     currentNode = currentNode.next;
-//                 }
-//             }
-//         }
-//     }
+        linkedList.showAll();
+        console.log();
+        // linkedList.removeAt(2);
+        // linkedList.remove();
+        console.log(linkedList.indexOf(node2));
+        console.log();
+        linkedList.showAll();
 
 
 

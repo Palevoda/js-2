@@ -1,4 +1,13 @@
 <script>
+    // size: Return the number of node(s)
+// head: Return the element of the head
+// add: Add another node in the tail
+// remove: Remove certain node
+// indexOf: Return the index of a node
+// elementAt: Return the node of an index
+// addAt: Insert a node at a specific index
+// removeAt: Delete a node at a specific index
+
     class Node {
             element;
             next = null;
@@ -39,13 +48,41 @@
                 }
             }
 
+            addAt(position, element) {
+
+                if (position > this.size || position < 0) {
+                    console.log("Index out of range");
+                } else if (position === 0) {
+                    element.next = this.head;
+                    this.head = element;
+                    // let buffer = this.head;
+                    // this.head = element;
+                    // this.head.next = buffer;
+                } else {
+                    let previous = null;
+                    let currentElement = this.head;
+                    for (let i = 0; i < this.size; i++) {
+
+                        if (i === position) {
+                            previous.next = element;
+                            element.next = currentElement;
+                            this.size++;
+                            break;
+                        } else {
+                            previous = currentElement;
+                            currentElement = currentElement.next;
+                        }
+                    }
+                }
+            }
+
             showAll() {
                 let currentElement = this.head;
 
                 if (this.size === 0) console.log("List is empty");
 
                 for (let i = 0; i < this.size; i++) {
-                    console.log(currentElement);
+                    console.log(currentElement.element);
                     currentElement = currentElement.next;
                 }
             }
@@ -62,4 +99,9 @@
         linkedList.add(node3);
 
         linkedList.showAll();
+        linkedList.addAt(0, node2);
+
+linkedList.showAll();
+
+
 </script>
